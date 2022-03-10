@@ -42,20 +42,19 @@ def secure_error(error:Exception):
     # Making the text read only
     Button(win,text="Close",command=lambda:win.destroy()).pack()
     text_area.configure(state ='disabled')
-    
-menu = Menu(root)
-files = Menu(menu)
-files.add_command(label="New Database",command=new_db)
-files.add_command(label="Load Database",command=load_db)
-files.add_command(label="Dump Code",command=dump_db_code)
+try:    
+    menu = Menu(root)
+    files = Menu(menu,tearoff=0)
+    files.add_command(label="New Database",command=new_db)
+    files.add_command(label="Load Database",command=load_db)
+    files.add_command(label="Dump Code",command=dump_db_code)
+    menu.add_cascade(menu=files,label="File")
 
+    root = Tk()
+    root.title("Querify")
+    root.geometry("900x600")
+    root.config(menu=menu)
 
-root = Tk()
-root.title("Querify")
-root.geometry("900x600")
-
-try:
-    ff
 except Exception as error:
     secure_error(error)
 
